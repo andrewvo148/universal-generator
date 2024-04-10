@@ -1,23 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   DesktopOutlined,
   FileOutlined,
+  SettingOutlined,
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Routes, Route, Outlet, Link, NavLink } from "react-router-dom";
+import { Routes, Route, Outlet, Link, NavLink, useLocation } from "react-router-dom";
 
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const DashboardLayout: React.FC = () => {
+
   const [collapsed, setCollapsed] = useState(false);
+  const selectedKey= location.pathname;
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -25,12 +28,17 @@ const DashboardLayout: React.FC = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="entity" icon={<PieChartOutlined />}>
-            <Link to="entity">Entity</Link>
+        <Menu theme="dark" defaultSelectedKeys={[selectedKey]} mode="inline">
+          <Menu.Item key="/" icon={<PieChartOutlined />}>
+            <Link to="/">Entity</Link>
           </Menu.Item>
-          <Menu.SubMenu key="sub1" title="Submenu">
-            <Menu.Item key="3">Option 3</Menu.Item>
+          <Menu.Item key="/dto" icon={<PieChartOutlined />}>
+            <Link to="/dto">DTO</Link>
+          </Menu.Item>
+          <Menu.SubMenu key="Settings" title="Settings" icon={<SettingOutlined />}>
+            <Menu.Item key="templates">
+              <Link to="/settings/templates">Templates</Link>
+            </Menu.Item>
             <Menu.Item key="4">Option 4</Menu.Item>
           </Menu.SubMenu>
         </Menu>
