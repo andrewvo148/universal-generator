@@ -45,6 +45,10 @@ const EntityPage: React.FC = () => {
       style={{ maxWidth: 1000 }}
       autoComplete="off"
     >
+       <Form.Item label="Package name" name={[  'name']}>
+                  <Input />
+                </Form.Item>
+
       <Form.List name="users">
         {(fields, { add, remove }) => (
           <>
@@ -93,7 +97,7 @@ const EntityPage: React.FC = () => {
       </Form.List>
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Submit
+          Preview
         </Button>
       </Form.Item>
     </Form>
